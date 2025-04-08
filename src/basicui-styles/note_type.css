@@ -1,0 +1,29 @@
+.note-type-Fleeting,
+.note-type-Reference,
+.note-type-Literature,
+.note-type-Permanent {
+  padding: 2px 10px;
+  border: none;
+  border-radius: 24px;
+  font-size: 12px;
+}
+
+.note-type-Fleeting {
+  background-color: #96BDC6;
+  color: #000;
+}
+
+.note-type-Reference {
+  background-color: #C8B8DB;
+  color: #000;
+}
+
+.note-type-Literature {
+  background-color: #F2B0A6;
+  color: #000;
+}
+
+.note-type-Permanent {
+  background-color: #E2D686;
+  color: #000;
+}
