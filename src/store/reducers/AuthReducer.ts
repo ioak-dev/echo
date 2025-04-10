@@ -2,8 +2,10 @@ import { GET_AUTH, ADD_AUTH, REMOVE_AUTH } from '../actions/types';
 
 const initialState = {
   isAuth: false,
-  firstname: '',
-  lastname: '',
+  firstname: undefined,
+  lastname: undefined,
+  given_name: undefined,
+  family_name: undefined
 };
 
 export default function (state = initialState, action: any) {
@@ -24,9 +26,7 @@ export default function (state = initialState, action: any) {
       console.log('REMOVE_AUTH reducer');
       return {
         ...state,
-        isAuth: false,
-        firstname: '',
-        lastname: '',
+        ...initialState
       };
     default:
       return state;

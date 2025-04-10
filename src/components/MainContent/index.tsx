@@ -5,7 +5,7 @@ import "./style.scss";
 
 import BodyContainer from "../App/BodyContainer";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AppShell } from "basicui";
+import { AppShellReveal } from "basicui";
 
 import logoIconWhite from "../../images/echo_white_small.svg";
 import logoTextWhite from "../../images/echo_white_text.svg";
@@ -84,12 +84,13 @@ const MainContent = (props: Props) => {
   };
 
   return (
-    <AppShell
+    <AppShellReveal
       isDarkMode={profile.theme === "basicui-dark"}
-      isSidebarExpanded={profile.sidebar}
-      onSidebarToggle={toggleSidebar}
+      isMenuActive={profile.sidebar}
+      setIsMenuActive={toggleSidebar}
       onSignin={login}
       onSignout={logout}
+      userName={authorization.isAuth ? `${authorization?.given_name} ${authorization?.family_name}` : undefined}
       onDarkModeToggle={toggleMode}
       logoIconBlack={logoIconBlack}
       logoIconWhite={logoIconWhite}
@@ -102,117 +103,97 @@ const MainContent = (props: Props) => {
       }
       location={location}
     >
-      <AppShell.Navbar>
-        <AppShell.Navbar.Header>
-          <div className="side-content__header__button">
-            <button className="button" onClick={chooseCompany}>
-              <FontAwesomeIcon icon={faTh} />
-            </button>
-          </div>
-        </AppShell.Navbar.Header>
-        <AppShell.Navbar.Body>
-          {/* <SideContent space={props.space} /> */}
-          {props.space && (
-            <>
-              <SideNavSubHeading short="Notes" long="Notes" />
-              <SideNavLink
-                link={`/${props.space}/new-note`}
-                icon={faPlus}
-                label="New note"
-              />
-              <SideNavLink
-                link={`/${props.space}/browse`}
-                icon={faFolderOpen}
-                label="Browse"
-              />
-              <SideNavLink
-                link={`/${props.space}/search`}
-                icon={faSearch}
-                label="Search"
-              />
-              <SideNavLink
-                link={`/${props.space}/graph`}
-                icon={faCircleNodes}
-                label="Graph"
-              />
-              <SideNavLink
-                link={`/${props.space}/index`}
-                icon={faListUl}
-                label="Index"
-              />
-              <SideNavSubHeading short="Library" long="Library" />
-              <SideNavLink
-                link={`/${props.space}/library`}
-                icon={faPlus}
-                label="New chapter"
-              />
-              <SideNavLink
-                link={`/${props.space}/library`}
-                icon={faBook}
-                label="Books"
-              />
-              <SideNavLink
-                link={`/${props.space}/library`}
-                icon={faSearch}
-                label="Search"
-              />
-              <SideNavLink
-                link={`/${props.space}/library`}
-                icon={faListUl}
-                label="Index"
-              />
-              <SideNavSubHeading short="System" long="System" />
-              <SideNavLink
-                link={`/${props.space}/color-filter`}
-                icon={faPalette}
-                label="Color filter"
-              />
-              <SideNavLink
-                link={`/${props.space}/metadata-definition`}
-                icon={faListUl}
-                label="Metadata"
-              />
-              <SideNavLink
-                link={`/${props.space}/stopwords`}
-                icon={faStrikethrough}
-                label="Stopwords"
-              />
-              <SideNavLink
-                link={`/${props.space}/settings/company`}
-                icon={faCogs}
-                label="Company setting"
-              />
-              <SideNavLink
-                link={`/${props.space}/settings/user`}
-                icon={faUserShield}
-                label="User"
-              />
-              <SideNavLink
-                link={`/${props.space}/settings/backup`}
-                icon={faDatabase}
-                label="Backup and restore"
-              />
-              {/* <SideNavLink
-              link={`/${props.space}/settings?link=backup`}
-              icon={faFileImport}
-              label="Export and import"
-            /> */}
-            </>
-          )}
-        </AppShell.Navbar.Body>
-        <AppShell.Navbar.Footer />
-      </AppShell.Navbar>
-      <AppShell.Topbar />
-      <AppShell.MobileNavbar>
-        <AppShell.MobileNavbar.Body>
-          <MobileSidebar space={props.space} />
-        </AppShell.MobileNavbar.Body>
-        <AppShell.MobileNavbar.Footer>Footer</AppShell.MobileNavbar.Footer>
-      </AppShell.MobileNavbar>
-      <AppShell.Body>
+      <AppShellReveal.Navbar>
+        {props.space && (
+          <>
+            <SideNavSubHeading short="Notes" long="Notes" />
+            <SideNavLink
+              link={`/${props.space}/new-note`}
+              icon={faPlus}
+              label="New note"
+            />
+            <SideNavLink
+              link={`/${props.space}/browse`}
+              icon={faFolderOpen}
+              label="Browse"
+            />
+            <SideNavLink
+              link={`/${props.space}/search`}
+              icon={faSearch}
+              label="Search"
+            />
+            <SideNavLink
+              link={`/${props.space}/graph`}
+              icon={faCircleNodes}
+              label="Graph"
+            />
+            <SideNavLink
+              link={`/${props.space}/index`}
+              icon={faListUl}
+              label="Index"
+            />
+            <SideNavSubHeading short="Library" long="Library" />
+            <SideNavLink
+              link={`/${props.space}/library`}
+              icon={faPlus}
+              label="New chapter"
+            />
+            <SideNavLink
+              link={`/${props.space}/library`}
+              icon={faBook}
+              label="Books"
+            />
+            <SideNavLink
+              link={`/${props.space}/library`}
+              icon={faSearch}
+              label="Search"
+            />
+            <SideNavLink
+              link={`/${props.space}/library`}
+              icon={faListUl}
+              label="Index"
+            />
+            <SideNavSubHeading short="System" long="System" />
+            <SideNavLink
+              link={`/${props.space}/color-filter`}
+              icon={faPalette}
+              label="Color filter"
+            />
+            <SideNavLink
+              link={`/${props.space}/metadata-definition`}
+              icon={faListUl}
+              label="Metadata"
+            />
+            <SideNavLink
+              link={`/${props.space}/stopwords`}
+              icon={faStrikethrough}
+              label="Stopwords"
+            />
+            <SideNavLink
+              link={`/${props.space}/settings/company`}
+              icon={faCogs}
+              label="Company setting"
+            />
+            <SideNavLink
+              link={`/${props.space}/settings/user`}
+              icon={faUserShield}
+              label="User"
+            />
+            <SideNavLink
+              link={`/${props.space}/settings/backup`}
+              icon={faDatabase}
+              label="Backup and restore"
+            />
+          </>
+        )}
+      </AppShellReveal.Navbar>
+      <AppShellReveal.MobileNavbar>
+        <MobileSidebar space={props.space} />
+      </AppShellReveal.MobileNavbar>
+      <AppShellReveal.Body>
         <BodyContainer {...props} />
-      </AppShell.Body>
-    </AppShell>
+      </AppShellReveal.Body>
+    </AppShellReveal>
   );
 };
 

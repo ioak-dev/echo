@@ -59,7 +59,16 @@ module.exports = (env) => {
       ],
     },
     devServer: {
-      static: path.join(__dirname, 'build'),
+      static: [
+        {
+          directory: path.join(__dirname, 'public'), // 👈 serve your public assets
+          publicPath: '/',
+        },
+        {
+          directory: path.join(__dirname, 'build'), // your build output
+          publicPath: '/',
+        },
+      ],
       historyApiFallback: true,
       host: '0.0.0.0',
       compress: true,
